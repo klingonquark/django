@@ -3,9 +3,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin  # für die klassenbasierten Views
 from django.contrib.auth.decorators import login_required   # für die funktionsbasierte Views
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Category, Event
 from .forms import EventForm, EmailForm
+from .api.serializers import CategorySerializer
 
 
 class IsAdminUser(UserPassesTestMixin):
@@ -111,6 +112,13 @@ def category_list(request):
         "dummy": "Das ist ein Dummytext",
         "categories": categories
     }
+    # Wenn http://127.0.0.1:8000/events/categories?json=True
+    # soll JSON serializert werden
+    # FAlls der content-type header ausglesen werden soll: requests.headers
+    if request.GET.get("json"):
+        s = CategorySerializer(categories, many=True)
+        return JsonResponse(s.data, safe=False)
+
     return render(request, "events/categories.html", context)
 
 

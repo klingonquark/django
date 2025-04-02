@@ -1,5 +1,6 @@
 # Django Restapi Projekt 
 
+https://yopad.eu/p/django-rest-kurs
 
 ## Installationshinweise
 

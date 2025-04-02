@@ -4,3 +4,6 @@ django-crispy-forms
 crispy-bootstrap5
 whitenoise
 django-environ
+djangorestframework
+drf-spectacular-sidecar
+drf-spectacular
