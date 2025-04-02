@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>{{category}}</h1>
+<a href="{% url 'events:category_list' %}">Zurück zur Übersicht</a>
+{% endblock %}
+
+
+{% block title %}
+{{category}}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>  
+<meta charset="UTF-8">
+<title>{% block title %}{% endblock %}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 col-sm-11">
+            
+            {% if user.is_authenticated %}
+
+            <p>
+                Hallo {{user}}, du bist eingeloggt
+            </p>
+
+            <form method="POST"
+                action="{% url 'logout' %}">
+                        {% csrf_token %}
+                <button class="btn btn-primary">Logout</button>
+            </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Einloggen</a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 col-sm-11">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html> 

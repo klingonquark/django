@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+
+{% if object %}
+    <h1>Event Update</h1>
+{% else %}
+    <h1>Event anlegen</h1>
+{% endif %}
+
+
+<form method="POST">
+{% csrf_token %} 
+{{form|crispy}}
+
+<div>
+ <input type="submit" value="Daten absenden" />   
+</div>
+</form>
+{% endblock %}
+
+
+{% block title %}
+Neues Event anlegen
+{% endblock %}
